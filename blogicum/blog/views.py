@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse
+from django.http import Http404
+
 
 posts = [
     {
@@ -52,8 +54,12 @@ def index(request):
 
 
 def post_detail(request, post_id):
+    try:
+        post = posts[post_id]
+    except IndexError:
+        raise Http404("Статья не найдена")
     template = 'blog/detail.html'
-    context = {'post': posts[post_id]}
+    context = {'post': post}
     return render(request, template, context)
 
 
