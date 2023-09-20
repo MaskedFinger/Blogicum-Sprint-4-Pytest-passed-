@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.urls import reverse
 
 posts = [
     {
@@ -60,4 +60,7 @@ def post_detail(request, post_id):
 def category_posts(request, slug):
     template = 'blog/category.html'
     context = {'slug': slug}
+    category_url = reverse('blog:category_posts', args=[slug])
+    context['category_url'] = category_url
+    
     return render(request, template, context)

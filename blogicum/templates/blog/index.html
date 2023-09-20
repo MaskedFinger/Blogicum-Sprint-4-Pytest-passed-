@@ -16,7 +16,7 @@
               Дата: {{ post.date }}
             </li>
             <li>
-              <a>Категория: <a href="{{ post.category }}">{{ post.category }}</a>
+              <a>Категория: <a href="{% url 'blog:category_posts' slug=post.category %}">{{ post.category }}</a></a>
             </li>
           </ul>          
           <p>
