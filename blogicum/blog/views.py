@@ -62,5 +62,4 @@ def category_posts(request, slug):
     context = {'slug': slug}
     category_url = reverse('blog:category_posts', args=[slug])
     context['category_url'] = category_url
-    
     return render(request, template, context)
