@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.urls import reverse
 from django.http import Http404
 
 
@@ -49,7 +48,7 @@ posts = [
 
 def index(request):
     template = 'blog/index.html'
-    context = {'posts_list': posts[::-1]}
+    context = {'posts_list': posts[::-1], 'show_category': True}
     return render(request, template, context)
 
 
@@ -58,13 +57,11 @@ def post_detail(request, post_id):
         raise Http404("Статья не найдена")
     post = posts[post_id]
     template = 'blog/detail.html'
-    context = {'post': post}
+    context = {'post': post, 'show_category': False}
     return render(request, template, context)
 
 
 def category_posts(request, slug):
     template = 'blog/category.html'
     context = {'slug': slug}
-    category_url = reverse('blog:category_posts', args=[slug])
-    context['category_url'] = category_url
     return render(request, template, context)
