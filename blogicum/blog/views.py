@@ -54,10 +54,9 @@ def index(request):
 
 
 def post_detail(request, post_id):
-    try:
-        post = posts[post_id]
-    except IndexError:
+    if post_id < 0 or post_id >= len(posts):
         raise Http404("Статья не найдена")
+    post = posts[post_id]
     template = 'blog/detail.html'
     context = {'post': post}
     return render(request, template, context)
