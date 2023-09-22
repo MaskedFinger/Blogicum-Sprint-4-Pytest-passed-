@@ -1,13 +1,17 @@
 <article>
-    <ul>
-      <li>Место: {{ post.location }}</li>
-      <li>Дата: {{ post.date }}</li>
-      {% if show_category %}
-        <li><a>Категория: <a href="{% url 'blog:category_posts' slug=post.category %}">{{ post.category }}</a></a></li>
-      {% else %}
-        <li>Категория: <a href="/category/{{ post.category }}/">{{ post.category }}</a></li>
-      {% endif %}
-    </ul>
-    <p>{{ post.text|truncatewords:10 }}</p>
-    <a href="{% url 'blog:post_detail' post.id %}">Читать полный текст</a>
-  </article>
+  <ul>
+    <li>Место: {{ post.location }}</li>
+    <li>Дата: {{ post.date }}</li>
+    {% if show_category %}
+        <li>Категория: {{ post.category }}</li>
+    {% else %}
+        <li>Категория: <a href="{% url 'blog:category_posts' slug=post.category %}">{{ post.category }}</a></li>
+    {% endif %}
+  </ul>
+  {% if not show_category %}
+      <p>{{ post.text }}</p>
+  {% else %}
+      <p>{{ post.text|truncatewords:10 }}</p>
+      <a href="{% url 'blog:post_detail' post.id %}">Читать полный текст</a>
+  {% endif %}
+</article>
