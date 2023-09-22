@@ -2,11 +2,7 @@
   <ul>
     <li>Место: {{ post.location }}</li>
     <li>Дата: {{ post.date }}</li>
-    {% if show_category %}
-        <li>Категория: {{ post.category }}</li>
-    {% else %}
-        <li>Категория: <a href="{% url 'blog:category_posts' slug=post.category %}">{{ post.category }}</a></li>
-    {% endif %}
+    <li>Категория: <a href="{% url 'blog:category_posts' slug=post.category %}">{{ post.category }}</a></li>
   </ul>
   {% if not show_category %}
       <p>{{ post.text }}</p>
